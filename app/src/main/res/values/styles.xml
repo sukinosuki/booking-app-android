@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="roundedCornerImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="avatarDotStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="backgroundColor">#FF8383</item>
+    </style>
+
+    <style name="homeHotelCardCoverStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="homeTabTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:labelTextSize">20sp</item>
+    </style>
+
+</resources>
