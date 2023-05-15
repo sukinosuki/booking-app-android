@@ -12,9 +12,19 @@
         <!-- Status bar color. -->
 <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
         <item name="android:statusBarColor">#F9F9FB</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
         <item name="android:windowLightStatusBar">true</item>
 <!--        <item name="android:windowTranslucentStatus">true</item>-->
 <!--        <item name="android:windowTranslucentNavigation">false</item>-->
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.FullScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--        status文字为light下的颜色-->
+        <!--        <item name="android:windowLightStatusBar">true</item>-->
+        <!--        忽略status bar高度-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--        <item name="android:windowTranslucentNavigation">false</item>-->
         <!-- Customize your theme here. -->
     </style>
 </resources>

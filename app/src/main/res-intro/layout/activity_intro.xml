@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.intro.IntroActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/intro" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingHorizontal="24dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="48dp"
+                android:background="@drawable/intro_info_box_background"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textAlignment="center"
+                    android:text="Find your dream villa in Indonesia"
+                    android:textSize="26sp"
+                    android:textColor="#464646"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:textColor="#E4E4E4"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:text="Long-term rental of villas with a guarantee of conformity with photographs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:background="@drawable/intro_info_box_get_start_button_background"
+                    android:text="Get Started"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:id="@+id/get_started_button"
+                    android:elevation="0dp"
+                    app:elevation="0dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:paddingHorizontal="38dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

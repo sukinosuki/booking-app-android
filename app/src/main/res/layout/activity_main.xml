@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="#F9F9FB"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".ui.main.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

@@ -9,7 +9,7 @@ import com.example.bookingapp.databinding.HotelCardPictureIndicatorLayoutBinding
 
 class HotelCardPictureIndicatorAdapter(
     private val activity: FragmentActivity,
-    private val pictureSize: Int
+    private var pictureSize: Int
 ) : RecyclerView.Adapter<HotelCardPictureIndicatorAdapter.ViewHolder>() {
 
     var currentIndex = 0
@@ -47,6 +47,11 @@ class HotelCardPictureIndicatorAdapter(
 
     fun currentIndexChange(i: Int) {
         currentIndex = i
+        notifyDataSetChanged()
+    }
+
+    fun setData(size: Int) {
+        pictureSize = size
         notifyDataSetChanged()
     }
 }

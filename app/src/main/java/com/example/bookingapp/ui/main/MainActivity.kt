@@ -1,8 +1,8 @@
-package com.example.bookingapp
+package com.example.bookingapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
+import com.example.bookingapp.R
 import com.example.bookingapp.adapter.ViewPager2FragmentStateAdapter
 import com.example.bookingapp.databinding.ActivityMainBinding
 import com.example.bookingapp.ui.main.chats.ChatsFragment

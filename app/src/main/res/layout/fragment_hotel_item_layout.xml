@@ -4,33 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.example.bookingapp.ui.villa.VillaViewModel" />
     </data>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="true"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
         tools:context=".ui.main.home.fragments.HotelCardFragment">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <FrameLayout
+                android:id="@+id/hotel_card_pictures_layout"
                 android:layout_width="match_parent"
                 android:layout_height="336dp"
                 android:background="@drawable/hotel_item_cover_background">
-
-                <!--                <com.google.android.material.imageview.ShapeableImageView-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:scaleType="centerCrop"-->
-                <!--                    app:shapeAppearanceOverlay="@style/homeHotelCardCoverStyle"-->
-                <!--                    android:src="@drawable/hotel_house2" />-->
 
                 <com.example.bookingapp.NestedScrollableHost
                     android:layout_width="match_parent"
@@ -44,11 +39,11 @@
 
                 </com.example.bookingapp.NestedScrollableHost>
 
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_marginStart="20dp"
+                    android:id="@+id/star_layout"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/hotel_card_star_background"
                     android:clickable="true"
@@ -60,13 +55,15 @@
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
-                        android:src="@drawable/icon_star" />
+                        tools:src="@drawable/icon_hotel_rate"
+                        android:src="@{vm.villa.isStared ? @drawable/icon_hotel_rate_fill : @drawable/icon_hotel_rate}" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="4,93"
+                        android:text="@{vm.villa.rate + ``}"
+                        tools:text="4,93"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -80,11 +77,13 @@
                     android:layout_marginEnd="15dp"
                     android:clickable="true"
                     android:focusable="true"
+                    android:id="@+id/favorite_image"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="5dp"
                     android:scaleType="fitCenter"
+                    tools:src="@drawable/icon_favorite"
                     app:shapeAppearanceOverlay="@style/avatarDotStyle"
-                    app:srcCompat="@drawable/icon_favorite" />
+                    android:src="@{vm.villa.isFavorite ? @drawable/icon_favorite_fill : @drawable/icon_favorite}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pictures_indicator_recyclerview"
@@ -107,7 +106,8 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Villa, Kemah Tinggi"
+                    android:text="@{vm.villa.title}"
+                    tools:text="Villa, Kemah Tinggi"
                     android:textColor="#464646"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -128,7 +128,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="2 bedrooms"
+                    android:text="@{vm.villa.bedrooms + ` bedrooms`}"
+                    tools:text="2 bedrooms"
                     android:textColor="#A1A7B0"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -149,7 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="214m2"
+                    tools:text="214m2"
+                    android:text="@{vm.villa.square + `m2`}"
                     android:textColor="#A1A7B0"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -160,7 +162,8 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ 920"
+                    tools:text="$ 920"
+                    android:text="@{`$ ` + vm.villa.pricePerMonth}"
                     android:textColor="#4C9FC1"
                     android:textSize="18sp"
                     android:textStyle="bold"

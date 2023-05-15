@@ -14,6 +14,7 @@ import com.example.bookingapp.databinding.FragmentHotelItemLayoutBinding
 import com.example.bookingapp.ui.main.home.adapter.HotelCardPictureIndicatorAdapter
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import kotlinx.coroutines.delay
 
 
 class HotelCardFragment : Fragment() {
@@ -62,6 +63,7 @@ class HotelCardFragment : Fragment() {
 
 //        binding.picturesViewPager.background = shapeDrawable
 
+
         binding.picturesViewPager.run {
             adapter = ViewPager2FragmentStateAdapter(requireActivity(), pictureFragments)
             registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback() {
@@ -77,7 +79,22 @@ class HotelCardFragment : Fragment() {
             adapter = picturesIndicatorAdapter
             setHasFixedSize(true)
         }
+
+        // 代码设置view宽高
+//        val layoutParams: ViewGroup.LayoutParams =
+//            binding.hotelCardPicturesLayout.layoutParams
+//
+//        Log.i("hanami", "onViewCreated height: ${layoutParams.height}")
+//        Log.i("hanami", "onViewCreated width: ${layoutParams.width}")
+//        layoutParams.height = 216
+//
+//        binding.hotelCardPicturesLayout.layoutParams = layoutParams
     }
+
+//    suspend fun test(){
+//        Log.i("HANAMI", "binding.hotelCardPicturesLayout.height: ${binding.hotelCardPicturesLayout.height}")
+//        Log.i("HANAMI", "binding.hotelCardPicturesLayout.measuredHeight: ${binding.hotelCardPicturesLayout.measuredHeight}")
+//    }
 
     companion object {
         @JvmStatic
