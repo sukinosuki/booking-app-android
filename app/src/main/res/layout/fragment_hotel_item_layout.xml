@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="vm"
-            type="com.example.bookingapp.ui.villa.VillaViewModel" />
+            name="villa"
+            type="com.example.bookingapp.model.Villa" />
+
     </data>
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="true"
@@ -21,29 +24,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/hotel_card_pictures_layout"
                 android:layout_width="match_parent"
                 android:layout_height="336dp"
-                android:background="@drawable/hotel_item_cover_background">
+                android:background="@color/teal_700"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="24dp">
 
                 <com.example.bookingapp.NestedScrollableHost
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <!--                    android:background="@drawable/hotel_item_cover_background"-->
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/pictures_view_pager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/hotel_item_cover_background" />
+                        android:clipChildren="true"
+                        android:clipToOutline="true"
+                        android:clipToPadding="true"
+                        android:outlineProvider="background"
+                        android:overScrollMode="never" />
 
                 </com.example.bookingapp.NestedScrollableHost>
 
+
                 <LinearLayout
+                    android:id="@+id/star_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_marginStart="20dp"
-                    android:id="@+id/star_layout"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/hotel_card_star_background"
                     android:clickable="true"
@@ -55,21 +67,22 @@
                     <ImageView
                         android:layout_width="14dp"
                         android:layout_height="14dp"
-                        tools:src="@drawable/icon_hotel_rate"
-                        android:src="@{vm.villa.isStared ? @drawable/icon_hotel_rate_fill : @drawable/icon_hotel_rate}" />
+                        android:src="@{villa.isStared ? @drawable/icon_hotel_rate_fill : @drawable/icon_hotel_rate}"
+                        tools:src="@drawable/icon_hotel_rate" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="@{vm.villa.rate + ``}"
-                        tools:text="4,93"
+                        android:text="@{villa.rate + ``}"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        tools:text="4,93" />
 
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/favorite_image"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="end"
@@ -77,13 +90,12 @@
                     android:layout_marginEnd="15dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:id="@+id/favorite_image"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="5dp"
                     android:scaleType="fitCenter"
-                    tools:src="@drawable/icon_favorite"
+                    android:src="@{villa.isFavorite ? @drawable/icon_favorite_fill : @drawable/icon_favorite}"
                     app:shapeAppearanceOverlay="@style/avatarDotStyle"
-                    android:src="@{vm.villa.isFavorite ? @drawable/icon_favorite_fill : @drawable/icon_favorite}" />
+                    tools:src="@drawable/icon_favorite" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pictures_indicator_recyclerview"
@@ -95,7 +107,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="4"
                     tools:listitem="@layout/hotel_card_picture_indicator_layout" />
-            </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -106,13 +118,13 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{vm.villa.title}"
-                    tools:text="Villa, Kemah Tinggi"
+                    android:text="@{villa.title}"
                     android:textColor="#464646"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Villa, Kemah Tinggi" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -128,13 +140,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@{vm.villa.bedrooms + ` bedrooms`}"
-                    tools:text="2 bedrooms"
+                    android:text="@{villa.bedrooms + ` bedrooms`}"
                     android:textColor="#A1A7B0"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    tools:text="2 bedrooms" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -150,25 +162,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    tools:text="214m2"
-                    android:text="@{vm.villa.square + `m2`}"
+                    android:text="@{villa.square + `m2`}"
                     android:textColor="#A1A7B0"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    tools:text="214m2" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="$ 920"
-                    android:text="@{`$ ` + vm.villa.pricePerMonth}"
+                    android:text="@{`$ ` + villa.pricePerMonth}"
                     android:textColor="#4C9FC1"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="$ 920" />
 
                 <TextView
                     android:layout_width="wrap_content"

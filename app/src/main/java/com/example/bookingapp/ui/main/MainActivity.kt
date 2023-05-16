@@ -13,7 +13,6 @@ import com.example.bookingapp.ui.main.settings.SettingsFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +51,6 @@ class MainActivity : AppCompatActivity() {
                 else -> 0
             }
 
-//            binding.viewPager.currentItem = position
             binding.viewPager.setCurrentItem(position, false)
 
             true

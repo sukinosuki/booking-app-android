@@ -3,6 +3,7 @@ package com.example.bookingapp.ui.villa
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bookingapp.adapter.ViewPager2FragmentStateAdapter
@@ -36,7 +37,7 @@ class VillaActivity : AppCompatActivity() {
             it.vm = villaViewModel
             it.lifecycleOwner = this
 
-            it.fragmentHotelItemLayout.vm = villaViewModel
+//            it.fragmentHotelItemLayout.vm = villaViewModel
             it.fragmentHotelItemLayout.lifecycleOwner = this
         }
 
@@ -54,6 +55,13 @@ class VillaActivity : AppCompatActivity() {
 
         with(binding.fragmentHotelItemLayout) {
 
+            hotelCardPicturesLayout.let {
+                val layoutParams = it.layoutParams
+                layoutParams.height = 600
+
+                it.layoutParams = layoutParams
+            }
+
             favoriteImage.setOnClickListener {
                 villaViewModel.toggleFavorite()
             }
@@ -70,6 +78,11 @@ class VillaActivity : AppCompatActivity() {
                         picturesIndicatorAdapter.currentIndexChange(position)
                     }
                 })
+
+                // ViewPager2设置overScrollMode
+                getChildAt(0)?.let {
+                    it.overScrollMode = View.OVER_SCROLL_NEVER
+                }
             }
 
             picturesIndicatorRecyclerview.run {
@@ -81,8 +94,9 @@ class VillaActivity : AppCompatActivity() {
         villaViewModel.villa.observe(this) { villa ->
             if (villa == null) return@observe
 
-            if (convenienceTagAdapter.tags.isEmpty()) {
-                Log.i("hanami", "initView: 初始化adapter")
+            binding.fragmentHotelItemLayout.villa = villa
+
+            if (binding.fragmentHotelItemLayout.picturesViewPager.adapter == null) {
                 convenienceTagAdapter.setData(villa.conveniences)
 
                 picturesIndicatorAdapter.setData(villa.pictures.size)

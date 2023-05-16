@@ -13,7 +13,6 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityIntroBinding.inflate(layoutInflater).also {
-
             setContentView(it.root)
         }
 

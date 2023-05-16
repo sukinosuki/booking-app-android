@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F9F9FB"
+        android:overScrollMode="never"
         android:orientation="vertical">
 
         <LinearLayout
@@ -86,13 +87,12 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:shapeAppearanceOverlay="@style/roundedCornerImageStyle" />
 
-                        <com.google.android.material.imageview.ShapeableImageView
+                        <ImageView
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:background="@drawable/avatar_dot_background"
                             app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
-                            app:layout_constraintTop_toTopOf="@+id/shapeableImageView"
-                            app:shapeAppearanceOverlay="@style/avatarDotStyle" />
+                            app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
@@ -181,7 +181,8 @@
                 </com.google.android.material.tabs.TabLayout>
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager"
+                    android:id="@+id/tab_view_pager"
+                    android:overScrollMode="never"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

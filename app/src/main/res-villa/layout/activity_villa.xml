@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.example.bookingapp.ui.villa.VillaViewModel" />
@@ -26,9 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="80dp"
+                android:paddingTop="90dp"
                 android:paddingBottom="100dp">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,9 +97,9 @@
                             android:text="@{vm.villa.hostName}"
                             android:textColor="#464646"
                             android:textSize="16sp"
-                            tools:text="Hanami"
                             app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView2"
-                            app:layout_constraintStart_toStartOf="@+id/textView4" />
+                            app:layout_constraintStart_toStartOf="@+id/textView4"
+                            tools:text="Hanami" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -131,18 +131,20 @@
                     android:id="@+id/convenience_tag_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:paddingVertical="12dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
                     android:paddingLeft="24dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="5"
+                    android:overScrollMode="never"
+
                     tools:listitem="@layout/convenience_tag_layout" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:paddingHorizontal="24dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -201,19 +203,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:paddingTop="20dp"
+            android:paddingTop="40dp"
+            android:background="@color/teal_700"
             app:navigationIcon="@drawable/toolbar_back"
             app:title="Villa, Kemah Tinggi"
             app:titleTextColor="#464646">
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/toolbar_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -221,9 +222,9 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="6dp"
                 android:src="@drawable/icon_nav_chats"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -231,6 +232,5 @@
                 app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
 
 </layout>

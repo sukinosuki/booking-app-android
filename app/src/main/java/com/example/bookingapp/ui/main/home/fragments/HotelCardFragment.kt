@@ -1,37 +1,44 @@
 package com.example.bookingapp.ui.main.home.fragments
 
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.bookingapp.R
 import com.example.bookingapp.adapter.ViewPager2FragmentStateAdapter
-import com.example.bookingapp.databinding.FragmentHotelItemLayoutBinding
+import com.example.bookingapp.databinding.FragmentHomeHotelItemLayoutWrapBinding
+import com.example.bookingapp.ui.main.home.HomeFragmentViewModel
 import com.example.bookingapp.ui.main.home.adapter.HotelCardPictureIndicatorAdapter
+import com.example.bookingapp.ui.villa.VillaActivity
+import com.example.bookingapp.util.viewpage2_transformer.ScaleInTransformer
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
-import kotlinx.coroutines.delay
 
-
-class HotelCardFragment : Fragment() {
-    private lateinit var binding: FragmentHotelItemLayoutBinding
+class HotelCardFragment(val tabIndex: Int, private val villaIndex: Int) : Fragment() {
+    private lateinit var binding: FragmentHomeHotelItemLayoutWrapBinding
 
     private val picturesIndicatorAdapter by lazy {
-        HotelCardPictureIndicatorAdapter(requireActivity(), 2)
+        HotelCardPictureIndicatorAdapter(requireActivity(), 0)
     }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
+
+    private val homeViewModel by lazy {
+        ViewModelProvider(requireActivity())[HomeFragmentViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHotelItemLayoutBinding.inflate(inflater)
+        binding = FragmentHomeHotelItemLayoutWrapBinding.inflate(inflater)
+
+        binding.lifecycleOwner = requireActivity()
 
         return binding.root
     }
@@ -39,11 +46,88 @@ class HotelCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pictureFragments = listOf(
-            HotelCardPictureFragment.newInstance("1", "2"),
-            HotelCardPictureFragment.newInstance("1", "2"),
-        )
+        binding.fragmentHotelItemLayout.picturesViewPager.run {
 
+            // viewPager2设置过渡动画
+//            setPageTransformer(DepthPageTransformer())
+            val compositePageTransformer = CompositePageTransformer()
+//            compositePageTransformer.addTransformer(ScaleInTransformer())
+//        compositePageTransformer.addTransformer(DepthPageTransformer())
+            compositePageTransformer.addTransformer(
+                MarginPageTransformer(
+                    resources.getDimension(R.dimen.dp_10).toInt()
+                )
+            )
+//            setPageTransformer(ScaleInTransformer())
+            setPageTransformer(compositePageTransformer)
+//            setPageTransformer(ZoomOutPageTransformer())
+
+            // 滑动方向
+            // viewPager2.orientation = ViewPager2.ORIENTATION_VERTICAL or ViewPager2.ORIENTATION_HORIZONTAL
+            // orientation=ViewPager2.ORIENTATION_VERTICAL
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    picturesIndicatorAdapter.currentIndexChange(position)
+                }
+            })
+
+            // ViewPager2设置overScrollMode
+            getChildAt(0)?.let {
+                it.overScrollMode = View.OVER_SCROLL_NEVER
+            }
+        }
+
+        binding.fragmentHotelItemLayout.picturesIndicatorRecyclerview.run {
+            adapter = picturesIndicatorAdapter
+            setHasFixedSize(true)
+        }
+
+        binding.fragmentHotelItemLayout.favoriteImage.setOnClickListener {
+            homeViewModel.toggleFavorite(tabIndex, villaIndex)
+        }
+
+        binding.fragmentHotelItemLayout.starLayout.setOnClickListener {
+            homeViewModel.toggleRate(tabIndex, villaIndex)
+        }
+
+//        binding.fragmentHotelItemLayout.lifecycleOwner = requireActivity()
+        binding.fragmentHotelItemLayout.layout.setOnClickListener {
+            startActivity(Intent(requireActivity(), VillaActivity::class.java))
+            requireActivity().overridePendingTransition(
+                R.anim.slide_from_right,
+                R.anim.slide_to_left
+            )
+        }
+
+        homeViewModel.tabs.observe(requireActivity()) { tabs ->
+            if (tabs.isEmpty()) return@observe
+
+            val villa = tabs[tabIndex].villas[villaIndex]
+
+            binding.fragmentHotelItemLayout.villa = villa
+
+            if (binding.fragmentHotelItemLayout.picturesViewPager.adapter == null) {
+
+                val pictureFragments = villa.pictures.map {
+                    HotelCardPictureFragment.newInstance("1", "2")
+                }
+
+                picturesIndicatorAdapter.setData(villa.pictures.size)
+
+                binding.fragmentHotelItemLayout.picturesViewPager.adapter =
+                    ViewPager2FragmentStateAdapter(requireActivity(), pictureFragments)
+
+//                // ViewPager2设置overScrollMode
+//                binding.fragmentHotelItemLayout.picturesViewPager.getChildAt(0)?.let {
+//                    it.overScrollMode = View.OVER_SCROLL_NEVER
+//                }
+            }
+        }
+
+        // TODO
         val appearanceModel = ShapeAppearanceModel.builder()
 //            .setTopLeftCorner(RoundedCornerTreatment())
 //            .setTopLeftCornerSize(20F)
@@ -62,42 +146,11 @@ class HotelCardFragment : Fragment() {
 //        shapeDrawable.setTint(Color.parseColor(color))
 
 //        binding.picturesViewPager.background = shapeDrawable
-
-
-        binding.picturesViewPager.run {
-            adapter = ViewPager2FragmentStateAdapter(requireActivity(), pictureFragments)
-            registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-
-                    picturesIndicatorAdapter.currentIndexChange(position)
-                }
-            })
-        }
-
-        binding.picturesIndicatorRecyclerview.run {
-            adapter = picturesIndicatorAdapter
-            setHasFixedSize(true)
-        }
-
-        // 代码设置view宽高
-//        val layoutParams: ViewGroup.LayoutParams =
-//            binding.hotelCardPicturesLayout.layoutParams
-//
-//        Log.i("hanami", "onViewCreated height: ${layoutParams.height}")
-//        Log.i("hanami", "onViewCreated width: ${layoutParams.width}")
-//        layoutParams.height = 216
-//
-//        binding.hotelCardPicturesLayout.layoutParams = layoutParams
     }
-
-//    suspend fun test(){
-//        Log.i("HANAMI", "binding.hotelCardPicturesLayout.height: ${binding.hotelCardPicturesLayout.height}")
-//        Log.i("HANAMI", "binding.hotelCardPicturesLayout.measuredHeight: ${binding.hotelCardPicturesLayout.measuredHeight}")
-//    }
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) = HotelCardFragment()
+        fun newInstance(tabIndex: Int, villaIndex: Int) =
+            HotelCardFragment(tabIndex, villaIndex)
     }
 }

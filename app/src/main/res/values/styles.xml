@@ -7,9 +7,9 @@
     </style>
 
     <style name="avatarDotStyle">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-        <item name="backgroundColor">#FF8383</item>
+<!--        <item name="cornerFamily">rounded</item>-->
+<!--        <item name="cornerSize">50%</item>-->
+<!--        <item name="backgroundColor">#FF8383</item>-->
     </style>
 
     <style name="homeHotelCardCoverStyle">

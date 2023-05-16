@@ -1,4 +1,6 @@
-package com.example.bookingapp.ui.villa.model
+package com.example.bookingapp.model
+
+import com.example.bookingapp.ui.villa.model.ConvenienceTag
 
 data class Villa(
     val pricePerMonth: Int,
@@ -12,5 +14,5 @@ data class Villa(
     val introduction: String,
     var rate: Int,
     var isStared: Boolean,
-    val isFavorite: Boolean
+    var isFavorite: Boolean
 )

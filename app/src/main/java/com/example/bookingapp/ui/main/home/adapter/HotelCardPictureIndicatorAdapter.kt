@@ -15,15 +15,10 @@ class HotelCardPictureIndicatorAdapter(
     var currentIndex = 0
 
     class ViewHolder(
-        activity: FragmentActivity,
         val binding: HotelCardPictureIndicatorLayoutBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            // TODO: adapter引用了activity
-            binding.lifecycleOwner = activity
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,8 +27,8 @@ class HotelCardPictureIndicatorAdapter(
             parent,
             false
         )
-
-        return ViewHolder(activity, binding)
+        binding.lifecycleOwner = activity
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {

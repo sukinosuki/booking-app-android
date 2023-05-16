@@ -1,16 +1,12 @@
-package com.example.bookingapp.ui.villa
+package com.example.bookingapp.util
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.bookingapp.ui.villa.model.ConvenienceTag
 import com.example.bookingapp.model.Villa
+import com.example.bookingapp.ui.villa.model.ConvenienceTag
 import kotlin.random.Random
 
-class VillaViewModel : ViewModel() {
-    val villa = MutableLiveData<Villa>()
+object Utils {
 
-    fun loadData(villaId: Int) {
-
+    fun generateRandomVilla(): Villa {
         val pictures = mutableListOf<String>()
         repeat(Random.nextInt(2, 5)) {
             pictures.add("url: $it")
@@ -38,25 +34,9 @@ class VillaViewModel : ViewModel() {
                     "only 5 minutes from the Indian Ocean",
             rate = Random.nextInt(1, 500),
             isStared = false,
-            isFavorite = false
+            isFavorite = true
         )
 
-        villa.postValue(_villa)
-    }
-
-    fun toggleFavorite() {
-            val copied = villa.value!!.copy(isFavorite = !villa.value!!.isFavorite)
-
-            villa.postValue(copied)
-    }
-
-    fun toggleStar() {
-        val isStared = villa.value!!.isStared
-        val starNum = villa.value!!.rate
-        val copied = villa.value!!.copy()
-        copied.rate = if (isStared) copied.rate - 1 else copied.rate + 1
-        copied.isStared = !isStared
-
-        villa.postValue(copied)
+        return _villa
     }
 }
