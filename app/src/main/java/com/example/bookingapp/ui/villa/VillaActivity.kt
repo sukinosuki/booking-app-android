@@ -2,10 +2,12 @@ package com.example.bookingapp.ui.villa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.bookingapp.R
 import com.example.bookingapp.adapter.ViewPager2FragmentStateAdapter
 import com.example.bookingapp.databinding.ActivityVillaBinding
 import com.example.bookingapp.ui.main.home.adapter.HotelCardPictureIndicatorAdapter
@@ -53,11 +55,14 @@ class VillaActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
+        // 通过alpha修改透明度
+//        binding.toolbarLayout.alpha = 0.4F
+
         with(binding.fragmentHotelItemLayout) {
 
             hotelCardPicturesLayout.let {
                 val layoutParams = it.layoutParams
-                layoutParams.height = 600
+                layoutParams.height = 400
 
                 it.layoutParams = layoutParams
             }
@@ -78,6 +83,15 @@ class VillaActivity : AppCompatActivity() {
                         picturesIndicatorAdapter.currentIndexChange(position)
                     }
                 })
+
+                // 设置viewPager2元素边距
+                val compositePageTransformer = CompositePageTransformer()
+                compositePageTransformer.addTransformer(
+                    MarginPageTransformer(
+                        resources.getDimension(R.dimen.dp_8).toInt()
+                    )
+                )
+                setPageTransformer(compositePageTransformer)
 
                 // ViewPager2设置overScrollMode
                 getChildAt(0)?.let {

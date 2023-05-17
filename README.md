@@ -19,6 +19,7 @@
 - MutableLiveData<[String]>初始值分别设置为 1.null(会触发)、2."HANAMI"(会触发)、3.不设置初始值(不会触发)时, 是否会触发observe
 - 自定义app icon、app name
 - 使用CardView设置圆角以使CardView里面的child view也展示圆角
+- 通过传递一个ClickListener接口实现给Fragment构造函数、在外部设置lambda的方式来实现在外部调用Fragment的方法
 ---
 
 ## TODO

@@ -14,7 +14,6 @@ import com.example.bookingapp.databinding.FragmentHomeBinding
 import com.example.bookingapp.ui.main.home.fragments.HomeTabViewFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
-
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
@@ -22,6 +21,37 @@ class HomeFragment : Fragment() {
     private val homeFragmentViewModel by lazy {
         ViewModelProvider(requireActivity())[HomeFragmentViewModel::class.java]
     }
+
+    private val homeAreaBottomSheetFragment by lazy {
+//        HomeAreaBottomSheetFragment.newInstance(homeAreaBottomSheetFragmentClickListener).also {
+        HomeAreaBottomSheetFragment.newInstance { text, text2 ->
+            // TODO
+        }.also {
+
+//            it.setOnClickListener(HomeAreaBottomSheetFragment.OnItemClickListener { text ->
+//                Log.i("hanami", "click1111: $text")
+//                Toast.makeText(requireActivity(), "233 - $text", Toast.LENGTH_SHORT).show()
+//            })
+//            it.setOnClickListener {
+//                Toast.makeText(requireActivity(), "233 - $it", Toast.LENGTH_SHORT).show()
+//            }
+
+            it.setOnClickListener {t1,t2->
+//                Log.i("hanami", "aaa t1 $t1: t2 $t2")
+            }
+            it.setOnClickListener2 { t1,t2->
+                Toast.makeText(requireActivity(), "222 - $t1", Toast.LENGTH_SHORT).show()
+            }
+//            it.setOnClickListener2 {
+//                Toast.makeText(requireActivity(), "233 - $it", Toast.LENGTH_SHORT).show()
+//            }
+        }
+    }
+
+    private val homeAreaBottomSheetFragmentClickListener =
+        HomeAreaBottomSheetFragment.OnItemClickListener { text, text2 ->
+            Log.i("hanami", "t1 $text: t2 $text2")
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +74,10 @@ class HomeFragment : Fragment() {
             getChildAt(0)?.let {
                 it.overScrollMode = View.OVER_SCROLL_NEVER
             }
+        }
+
+        binding.locationName.setOnClickListener { it->
+            homeAreaBottomSheetFragment.show(requireActivity().supportFragmentManager, "tag")
         }
 
         homeFragmentViewModel.loadData()

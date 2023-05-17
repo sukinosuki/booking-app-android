@@ -206,7 +206,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
             android:paddingTop="40dp"
-            android:background="@color/teal_700"
+            android:id="@+id/toolbar_layout"
             app:navigationIcon="@drawable/toolbar_back"
             app:title="Villa, Kemah Tinggi"
             app:titleTextColor="#464646">

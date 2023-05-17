@@ -19,6 +19,8 @@ class HomeFragmentViewModel : ViewModel() {
 //            HomeTab(name = "Profitable", value = 5),
 //        )
     )
+    val areas = MutableLiveData(listOf("Indonesia", "Tokyo", "Shang Hai", "Shibuya", "Osaka", "New York"))
+
 //    val text = MutableLiveData<String>(null) // TODO: 会触发observe
 //    val text = MutableLiveData<String>("233") // TODO: 会触发observe
 //    val text = MutableLiveData<String>() // TODO: 不会触发observe

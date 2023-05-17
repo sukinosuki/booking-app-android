@@ -17,7 +17,6 @@ import com.example.bookingapp.databinding.FragmentHomeHotelItemLayoutWrapBinding
 import com.example.bookingapp.ui.main.home.HomeFragmentViewModel
 import com.example.bookingapp.ui.main.home.adapter.HotelCardPictureIndicatorAdapter
 import com.example.bookingapp.ui.villa.VillaActivity
-import com.example.bookingapp.util.viewpage2_transformer.ScaleInTransformer
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 
@@ -53,9 +52,10 @@ class HotelCardFragment(val tabIndex: Int, private val villaIndex: Int) : Fragme
             val compositePageTransformer = CompositePageTransformer()
 //            compositePageTransformer.addTransformer(ScaleInTransformer())
 //        compositePageTransformer.addTransformer(DepthPageTransformer())
+            // 设置viewPager2元素边距
             compositePageTransformer.addTransformer(
                 MarginPageTransformer(
-                    resources.getDimension(R.dimen.dp_10).toInt()
+                    resources.getDimension(R.dimen.dp_8).toInt()
                 )
             )
 //            setPageTransformer(ScaleInTransformer())
