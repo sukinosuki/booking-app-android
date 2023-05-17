@@ -29,3 +29,9 @@
 - 不以CardView设置圆角的方式让child view也显示圆角
 - 设置了圆角的view，在设置点击颜色时，颜色会超出圆角
 - 图标修改颜色
+
+---
+
+## Screenshot
+![home](./screenshot/home.png "main page")
+![villa](./screenshot/villa.png "villa page")
