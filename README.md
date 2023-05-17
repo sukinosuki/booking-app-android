@@ -1,4 +1,4 @@
-## learned and used
+## Learned and Used
 
 - databinding
 - viewmodel
@@ -35,3 +35,7 @@
 ## Screenshot
 ![home](./screenshot/home.png "main page")
 ![villa](./screenshot/villa.png "villa page")
+
+## Thanks
+
+ui design from [https://uikitfree.com/free-holiday-booking-app-template-for-figma/](https://uikitfree.com/free-holiday-booking-app-template-for-figma/)
