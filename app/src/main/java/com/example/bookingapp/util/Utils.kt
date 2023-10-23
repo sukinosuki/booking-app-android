@@ -1,5 +1,10 @@
 package com.example.bookingapp.util
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.content.Context
+import android.util.Log
+import android.view.View
 import com.example.bookingapp.model.Villa
 import com.example.bookingapp.ui.villa.model.ConvenienceTag
 import kotlin.random.Random
@@ -39,4 +44,62 @@ object Utils {
 
         return _villa
     }
+}
+
+fun crossFade(activity: Context, contentView: View?, loadingView: View? = null) {
+    val shortAnimationDuration =
+        activity.resources.getInteger(android.R.integer.config_shortAnimTime)
+
+    contentView?.apply {
+        alpha = 0f
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .setDuration(shortAnimationDuration.toLong())
+            .setListener(null)
+    }
+
+    loadingView?.apply {
+        animate()
+            .alpha(0f)
+            .setDuration(shortAnimationDuration.toLong())
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    loadingView.visibility = View.GONE
+                }
+            })
+    }
+}
+
+suspend fun <T> toCatch(block: suspend () -> T): Pair<T?, Exception?> {
+    var exception: Exception? = null
+    var res: T? = null
+
+    try {
+        res = block()
+    } catch (e: Exception) {
+        Log.e("hanami", "toCatch: e: $e")
+
+        // TODO: 开发环境打印
+//        e.printStackTrace()
+//        Log.e(TAG, "toCatch: trace size ${e.stackTrace.size}")
+//        Sentry.captureException(e)
+
+//        e.stackTrace.forEach {
+//            Log.e(TAG, "toCatch: trace $it")
+//        }
+        exception = e
+    }
+
+    return Pair(res, exception)
+}
+
+fun <T> mRepeat(m: Int, action: (Int) -> T): List<T> {
+    val list = mutableListOf<T>()
+    repeat(m) {
+        val t = action(it)
+        list.add(t)
+    }
+
+    return list
 }

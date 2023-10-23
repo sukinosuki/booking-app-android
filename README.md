@@ -20,6 +20,7 @@
 - 自定义app icon、app name
 - 使用CardView设置圆角以使CardView里面的child view也展示圆角
 - 通过传递一个ClickListener接口实现给Fragment构造函数、在外部设置lambda的方式来实现在外部调用Fragment的方法
+- 使用Runnable和Handler
 ---
 
 ## TODO

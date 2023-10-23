@@ -25,6 +25,10 @@
         <!--        <item name="android:windowLightStatusBar">true</item>-->
         <!--        忽略status bar高度-->
         <item name="android:windowTranslucentStatus">true</item>
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowActionBar">false</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
         <!--        <item name="android:windowTranslucentNavigation">false</item>-->
         <!-- Customize your theme here. -->
     </style>
